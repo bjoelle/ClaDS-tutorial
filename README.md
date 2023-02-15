@@ -97,7 +97,7 @@ BEAUti uses templates to define specific model configurations. The ClaDS templat
 <figure>
 	<a id="template"></a>
 	<img style="width:75.0%;" src="figures/template.png" alt="">
-	<figcaption>Figure 3: Selecting the MSBD template.</figcaption>
+	<figcaption>Figure 3: Selecting the ClaDS template.</figcaption>
 </figure>
 <br>
 
@@ -119,113 +119,190 @@ The first step of the setup is to import the two alignments that we will be usin
 
 ### Linking the tree
 
-Since we have imported two separate alignments, BEAUti has automatically created two separate substitution models, clock models and trees for each of the alignments. We will keep the two substitution and clock models, however we would like to estimate only one phylogeny for both genes. Thus we need to link the trees for both alignments.
+Since we have imported two different alignments, BEAUti has automatically created two separate substitution models, clock models and trees for each of the alignments. We will keep the two substitution models, however we would like to estimate only one clock model and one phylogeny for both genes. Thus we need to link the clock models and trees for both alignments.
 
 > In the **Partitions** panel, select both alignments by holding the **Ctrl** key and clicking on both lines.
+> Click on the **Link Clock Models** button. You should see that the **Clock Model** column now contains the same value for both alignments.
 > Click on the **Link trees** button. You should see that the **Tree** column now contains the same value for both alignments.
-> Optionally, you can rename the tree to **lizards** by clicking on the name field. 
+> Optionally, rename the tree and clock model to **lizards** by clicking on the name field, typing the new name then pressing **Enter**. 
 >
 
-The final alignment configuration is shown in [Figure 5](#importTree).
+The final alignment configuration is shown in [Figure 5](#linkedTree).
 
 <figure>
-	<a id="importTree"></a>
-	<img style="width:75.0%;" src="figures/tree.png" alt="">
-	<figcaption>Figure 5: Importing the tree into BEAUti.</figcaption>
+	<a id="linkedTree"></a>
+	<img style="width:75.0%;" src="figures/linked_tree.png" alt="">
+	<figcaption>Figure 5: Partition panel with linked trees.</figcaption>
 </figure>
 <br>
 
-### The parameter priors
+### Setting up the substitution models
 
-The next step is to look at the parameter priors, in the **Priors** panel. The default priors on the birth rates ({% eqinline \lambda_i %}), death rates ({% eqinline \mu_i %}) and total number of types ({% eqinline n_* %}) are reasonable for this dataset so we will not change them.
+The next set is to set up the substitution models for each alignments, found in the **Site Model** panel. Following the original analysis, we will set up GTR + G models for both alignments, with the number of rate categories set to 4.
 
-The expected average number of type changes across the entire tree is given by {% eqinline n = \gamma \times L %}, where L is the total length of the tree. The length of the fixed tree used in this analysis is {% eqinline \approx 1482 %}, so the default prior on {% eqinline \gamma %} would lead to a high expected number of type changes. From the previous analysis performed in BAMM, we expect only a few type changes across this phylogeny, so we will set the prior on {% eqinline \gamma %} to a lower range, using a **LogNormal(-4.0, 1.0)** distribution.
+> In the **Site Model** panel, set the **Gamma Category Count** to **4**.
+> Click on the arrow next to **JC69**, and select the **GTR** model.
+> Select the second alignment in the **Partition** list on the left, and repeat the same set up. 
+>
 
->  Click on the arrow next to **gamma** and change the value for **M** (mean) of the default log normal distribution to **-4** ([Figure 6](#gammaPrior)).
-> 
+The final substitution model configuration is shown in [Figure 6](#subst).
 
 <figure>
-	<a id="gammaPrior"></a>
-	<img style="width:75.0%;" src="figures/gammaprior.png" alt="">
-	<figcaption>Figure 6: Setting the prior on the type change rate.</figcaption>
+	<a id="subst"></a>
+	<img style="width:75.0%;" src="figures/subst.png" alt="">
+	<figcaption>Figure 6: Site model panel with GTR+G model.</figcaption>
+</figure>
+<br>
+
+### Setting up the clock priors
+
+Next come the clock model, and again we will follow the original study and use a relaxed lognormal clock model. 
+
+> In the **Clock Model** panel, Click on the arrow next to **Strict Clock**, and select the **Relaxed Clock Log Normal** model.
+>
+
+The final clock model configuration is shown in [Figure 7](#clock). You will notice that the **estimate** checkbox next to **Clock.rate** is unchecked and greyed out. This is normal: our dataset is composed entirely of extant samples, and we have not yet added any calibration times, thus the clock rate cannot be estimated. We will add those calibration times further in this tutorial.
+
+<figure>
+	<a id="clock"></a>
+	<img style="width:75.0%;" src="figures/clock.png" alt="">
+	<figcaption>Figure 7: Clock model panel with relaxed lognormal model.</figcaption>
+</figure>
+<br>
+
+### Adding calibration times
+
+The next step is to look at the different priors, in the **Priors** panel. The default priors on the parameter priors are reasonable for this dataset so we will not change them. However, as mentioned in the previous section, we need to add calibration times to our analysis in order to estimate the clock rate and node ages. We will accomplish this by setting MRCA priors, which add priors on the age of the most recent common ancestor of selected tips. These priors can also constrain certain subclades of the tree to be monophyletic.
+
+>  In the **Priors** panel, click on the **+ Add Prior** button at the bottom of the list. This opens the **Taxon Set Editor**.
+>  Select the taxa **SPHENOMORPHUS_JOBIENSIS** and **SPHENOMORPHUS_SOLOMONIS** and click on the **>>** button to add them to the set.
+>  Write the name of the taxon set **ngsphenos** in the box **Taxon set label** and click **OK** to confirm.
+
+The new prior now appears in the list as in [Figure 7](#MRCAprior), but it is not completely configured yet. We still need to select a distribution for the age of our chosen subclade.
+
+<figure>
+	<a id="MRCAprior"></a>
+	<img style="width:75.0%;" src="figures/MRCAprior.png" alt="">
+	<figcaption>Figure 6: MRCA prior without age distribution.</figcaption>
+</figure>
+<br>
+
+>  Click on the arrow on the right to **[none]** and select a **LogNormal** distribution for the age of the clade.
+>  Click on the arrow on the left of **ngsphenos.prior** to open the detailed view of the distribution.
+>  Set the **M** parameter (mean) to **2.986** and the **S** parameter (standard deviation) to **0.288034** ([Figure 7](#MRCApriorDet)).
+>  Click on the arrow again to close the detailed view.
+>
+
+You will notice that a new parameter (and prior) has been added to the list, the mean clock rate **ucldMean.c:lizards**. By adding a prior on the age of one of the nodes in the tree, we have calibrated our time tree and BEAUti has automatically adjusted the analysis as a result.
+
+<figure>
+	<a id="MRCApriorDet"></a>
+	<img style="width:75.0%;" src="figures/MRCAprior_det.png" alt="">
+	<figcaption>Figure 6: MRCA prior with age distribution.</figcaption>
+</figure>
+<br>
+
+Similarly, we will set two additional node calibrations:
+ 1. MRCA prior with a taxon set named **ozsphenos**, which contains all taxa except 5 (**PAPUASCINCUS_SP**, **PRASINOHAEMA_VIRENS**, **SPHENOMORPHUS_JOBIENSIS**, **SPHENOMORPHUS_MUELLERI** and **SPHENOMORPHUS_SOLOMONIS**). The age prior for this subclade is LogNormal(M = **3.2308**, S = **0.20596**).
+ 2. MRCA prior with a taxon set named **allsphenos**, which contains all taxa (and thus represents a prior on the root of the tree). The root age prior is LogNormal(M = **3.7305**, S = **0.17713**).
+ 
+In addition to the age calibrations, we will also constrain the **ozsphenos** subclade to be monophyletic.
+
+>  Check the **monophyletic** checkbox next to the **ozsphenos.prior** calibration.
+>
+
+The final result is shown in [Figure 7](#MRCApriorsAll). All node calibrations used in this tutorial were taken from the original analysis {% cite Rabosky2014 --file ClaDS-tutorial/master-refs.bib %}.
+
+<figure>
+	<a id="MRCApriorsAll"></a>
+	<img style="width:75.0%;" src="figures/MRCAprior_all.png" alt="">
+	<figcaption>Figure 6: Priors panel with all three MRCA priors.</figcaption>
 </figure>
 <br>
 
 ### The tree prior
 
-Next, we will specify the tree prior, i.e. the MSBD model. By default most of the parameters of the model are estimated, so it is not necessary to change their starting values. However, the extant sampling proportion ({% eqinline \rho %}) and extinct sampling probability ({% eqinline \sigma %}) are fixed. There are no extinct samples in this dataset, and we have sampled 86% of the extant hummingbirds species so we will set {% eqinline \sigma = 0 %} and {% eqinline \rho = 0.86 %}.
+Next, we will specify the tree prior, i.e. the ClaDS model. By default most of the parameters of the model are estimated, so it is not necessary to change their starting values. However, the extant sampling proportion ({% eqinline \rho %}) is fixed, and so needs to be correct. The dataset contains 85% of the extant diversity of the Australian sphenomorphine clade {% cite Rabosky2014 --file ClaDS-tutorial/master-refs.bib %}, so we will set {% eqinline \rho = 0.85 %}.
 
->  Click on the arrow next to **Tree** and change the value for **rho** (extant sampling proportion) of the MSBD model to **0.86** ([Figure 7](#treePrior)).
+>  Click on the arrow next to **Tree** to open the **ClaDS** options. 
+>  Change the value for **rho** (extant sampling proportion) of the ClaDS model to **0.85** ([Figure 7](#treePrior)).
 > 
 
 <figure>
 	<a id="treePrior"></a>
 	<img style="width:75.0%;" src="figures/treeprior.png" alt="">
-	<figcaption>Figure 7: Setting the MSBD tree prior.</figcaption>
+	<figcaption>Figure 7: Setting the ClaDS tree prior.</figcaption>
 </figure>
 <br>
 
-Note that many other options are available in this section, such as fixing the number of states or the value of some parameters (**estimate** checkboxes), setting the birth rate or the death rate to be shared between states (**identical across states** checkboxes), or setting the model to only use sampling-through-time (**To The Present** checkbox) .
+Note that many other options are available in this section, such as fixing the value of some parameters (**estimate** checkboxes), or changing the parametrization of the death rate (**Use fixed turnover** checkbox).
+
+### The parameter priors
+
+Most of the default parameter priors are reasonable, so we will not change them. However, the default prior for the mean clock rate is a uniform distribution from 0 to Infinity, which allows values which are too large for most datasets. A reasonable value for the global substitution rate of skinks is between 10^-3 to 1 substitution/site/My, so we will set a lognormal prior around this range of values.
+
+>  Use the dropdown menu on the right of **ucldMean.c:lizards* to select a **LogNormal** distribution for this prior.
+>  Click on the arrow left to **ucldMean.c:lizards** to open the detailed options. 
+>  Set the mean parameter **M** to **0.1** and the standard deviation parameter **S** to **1.0**. Check the **Mean in Real Space** checkbox.
+>  Click on the arrow again to close the detailed view.
+> 
+
+The final configuration for this prior is shown in [Figure 7](#clockPrior).
+
+<figure>
+	<a id="clockPrior"></a>
+	<img style="width:75.0%;" src="figures/clockprior.png" alt="">
+	<figcaption>Figure 7: Setting the prior on the mean clock rate.</figcaption>
+</figure>
+<br>
 
 ### MCMC options
 
 The next step is to set the options for running the chain, in the **MCMC** panel. We can see that several loggers are set by default:
 
-- the regular trace log, which in our case only records the posterior, likelihood and prior, as we are not using a substitution or clock model.
+- the regular trace log, which records the posterior, likelihood and prior, as well as parameter values for the substitution, clock and tree models.
 - the screenlog, which shows the advancement of the chain to the screen.
-- the tree log, which will log the trees in Nexus format, with the birth and death rate on each edge as metadata.
-- the state change model log, which logs the parameters associated with the model, i.e. {% eqinline \gamma %}, {% eqinline n_* %}, the number of sampled states and the birth and death rates for each state ({% eqinline \lambda_i %} and {% eqinline \mu_i %}).
-- the tip rates log, which logs the birth and death rates at each tip (optionally, at each node if the **nodeLog** option is activated).
+- the tree log, which will log the trees in Nexus format, with the estimated clock rate on each edge as metadata.
+- the tree rates log, which will log the trees in Nexus format, with the estimated birth and death rates on each edge as metadata.
  
-These last three logs are specific to MSBD. The only thing we will change here is the number of states recorded in the model. By default, only the sampled states are recorded, however this results in a log that is not in table format and so cannot be easily loaded into Tracer. Fixing the number of recorded states solves this problem.
-
->  In the **MCMC** panel, click on the arrow next to **stdStateslog** and click on the  **Edit** button to the right of the **StateChangeModelLogger** ([Figure 8](#logs)).
-> 
-
-<figure>
-	<a id="logs"></a>
-	<img style="width:75.0%;" src="figures/logs.png" alt="">
-	<figcaption>Figure 8: Opening the state change model log.</figcaption>
-</figure>
-<br>
-
->  In the new panel, set the value of **maxStates** to 10 ([Figure 9](#logpanel)).
->  Close the panel by clicking on **OK**.
+This last log is specific to ClaDS. The only thing we will change here are the names of the log files, to ensure we can find them again.
+>  Switch to the **MCMC** panel.
+>  In the **tracelog**, change the **File Name** to **lizards.log**.
+>  In the **treeRatesLog**, change the **File Name** to **lizards.rates.trees**.
 >
 
-<figure>
-	<a id="logpanel"></a>
-	<img style="width:65.0%;" src="figures/logstates.png" alt="">
-	<figcaption>Figure 9: Setting the state change model log.</figcaption>
-</figure>
-<br>
+For this tutorial, we will also adjust the chain length and sampling frequency, in order for the inference to complete rapidly.
+
+>  In the **MCMC** panel, change the **Chain Length** to **100000**.
+>  In the **tracelog**, **treelog** and **treeRatesLog**, change the **Log Every** to **1000**.
+>
 
 Once all the options have been set, the final step is to save the XML.
 
-> Save the XML file as `hummingbirds.xml` by navigating to **File > Save**.
+> Save the XML file as `lizards_clads.xml` by navigating to **File > Save**.
 > 
 
 ## Running the analysis in BEAST2
 
-> Start **BEAST2** and choose the file `hummingbirds.xml`. 
+> Start **BEAST2** and choose the file `lizards_clads.xml`. 
 > 
 > If you have **BEAGLE** installed tick the box to **Use BEAGLE library if available**, which will make the run faster.
 >
 > Hit **Run** to start the analysis.
 > 
 
-The run should take about 15-20 minutes.
+The run should take about 5-15 minutes.
 
 ## Analyzing the output
 
 ### Output files
 
-Our run has generated 4 different files:
+Our run has generated 3 different files:
 
-* `hummingbirds.log` which is the general trace log.
-* `hummingbirds.hummingbirds.states.log` which recorded the parameters associated with the state model.
-* `hummingbirds.hummingbirds.rates.log` which recorded the rates on tips of the tree.
-* `hummingbirds.hummingbirds.rates.trees` which recorded the sampled trees in Nexus format.
+* `lizards_clads.log` which is the general trace log.
+* `lizards.trees` and `lizards.rates.trees` which recorded the sampled trees in Nexus format.
+
+Note that our shortened analysis has probably not converged (as can easily be seen when importing the log file into Tracer). Thus we provide files from a longer run in the tutorial files, which we will use in the following section.
 
 ### Analyzing the log files
 
