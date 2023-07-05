@@ -60,7 +60,7 @@ This section will demonstrate how to create an XML configuration file using BEAU
 
 The first step is to install the ClaDS package, which will allow us to set up and run an analysis with lineage-specific birth and death rates.
 
-> Open the **BEAST2 Package Manager** by navigating to **File > Manage Packages**. ([Figure 1](#packageManage1))
+> Launch **BEAUti**, then open the **BEAST2 Package Manager** by navigating to **File > Manage Packages**. ([Figure 1](#packageManage1))
 > 
 
 <figure>
