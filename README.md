@@ -65,7 +65,7 @@ The first step is to install the ClaDS package, which will allow us to set up an
 
 <figure>
 	<a id="packageManage1"></a>
-	<img style="width:75.0%;" src="figures/package_manager.png" alt="">
+	<img style="width:80.0%;" src="figures/package_manager.png" alt="">
 	<figcaption>Figure 1: Finding the BEAST2 Package Manager.</figcaption>
 </figure>
 <br>
@@ -76,7 +76,7 @@ The first step is to install the ClaDS package, which will allow us to set up an
 
 <figure>
 	<a id="packageManage2"></a>
-	<img style="width:65.0%;" src="figures/packageClaDS.png" alt="">
+	<img style="width:70.0%;" src="figures/packageClaDS.png" alt="">
 	<figcaption>Figure 2: The BEAST2 Package Manager.</figcaption>
 </figure>
 <br>
@@ -96,7 +96,7 @@ BEAUti uses templates to define specific model configurations. The ClaDS templat
 
 <figure>
 	<a id="template"></a>
-	<img style="width:75.0%;" src="figures/template.png" alt="">
+	<img style="width:80.0%;" src="figures/template.png" alt="">
 	<figcaption>Figure 3: Selecting the ClaDS template.</figcaption>
 </figure>
 <br>
@@ -111,13 +111,13 @@ The first step of the setup is to import the two alignments that we will be usin
 
 <figure>
 	<a id="importAlignment"></a>
-	<img style="width:75.0%;" src="figures/alignment.png" alt="">
+	<img style="width:80.0%;" src="figures/alignment.png" alt="">
 	<figcaption>Figure 4: Importing the alignment into BEAUti.</figcaption>
 </figure>
 <br>
 
 
-### Linking the tree
+### Linking the tree and clock model
 
 Since we have imported two different alignments, BEAUti has automatically created two separate substitution models, clock models and trees for each of the alignments. We will keep the two substitution models, however we would like to estimate only one clock model and one phylogeny for both genes. Thus we need to link the clock models and trees for both alignments.
 
@@ -127,12 +127,12 @@ Since we have imported two different alignments, BEAUti has automatically create
 > Optionally, rename the tree and clock model to **lizards** by clicking on the name field, typing the new name then pressing **Enter**. 
 >
 
-The final alignment configuration is shown in [Figure 5](#linkedTree).
+The final alignment configuration is shown in [Figure 5](#linkedModels).
 
 <figure>
-	<a id="linkedTree"></a>
-	<img style="width:75.0%;" src="figures/linked_tree.png" alt="">
-	<figcaption>Figure 5: Partition panel with linked trees.</figcaption>
+	<a id="linkedModels"></a>
+	<img style="width:80.0%;" src="figures/linked_models.png" alt="">
+	<figcaption>Figure 5: Partition panel with linked tree and clock model.</figcaption>
 </figure>
 <br>
 
@@ -149,7 +149,7 @@ The final substitution model configuration is shown in [Figure 6](#subst).
 
 <figure>
 	<a id="subst"></a>
-	<img style="width:75.0%;" src="figures/subst.png" alt="">
+	<img style="width:80.0%;" src="figures/subst.png" alt="">
 	<figcaption>Figure 6: Site model panel with GTR+G model.</figcaption>
 </figure>
 <br>
@@ -165,7 +165,7 @@ The final clock model configuration is shown in [Figure 7](#clock). You will not
 
 <figure>
 	<a id="clock"></a>
-	<img style="width:75.0%;" src="figures/clock.png" alt="">
+	<img style="width:80.0%;" src="figures/clock.png" alt="">
 	<figcaption>Figure 7: Clock model panel with relaxed lognormal model.</figcaption>
 </figure>
 <br>
@@ -176,20 +176,20 @@ The next step is to look at the different priors, in the **Priors** panel. The d
 
 >  In the **Priors** panel, click on the **+ Add Prior** button at the bottom of the list. This opens the **Taxon Set Editor**.
 >  Select the taxa **SPHENOMORPHUS_JOBIENSIS** and **SPHENOMORPHUS_SOLOMONIS** and click on the **>>** button to add them to the set.
->  Write the name of the taxon set **ngsphenos** in the box **Taxon set label** and click **OK** to confirm.
-
-The new prior now appears in the list as in [Figure 7](#MRCAprior), but it is not completely configured yet. We still need to select a distribution for the age of our chosen subclade.
+>  Write the name of the taxon set **ngsphenos** in the box **Taxon set label** ([Figure 8](#taxonSet)) and click **OK** to confirm.
 
 <figure>
-	<a id="MRCAprior"></a>
-	<img style="width:75.0%;" src="figures/MRCAprior.png" alt="">
-	<figcaption>Figure 6: MRCA prior without age distribution.</figcaption>
+	<a id="taxonSet"></a>
+	<img style="width:80.0%;" src="figures/taxonSet.png" alt="">
+	<figcaption>Figure 8: Taxon set editor.</figcaption>
 </figure>
 <br>
 
+The new prior now appears at the bottom of the list of priors, but it is not completely configured yet. We still need to select a distribution for the age of our chosen subclade.
+
 >  Click on the arrow on the right to **[none]** and select a **LogNormal** distribution for the age of the clade.
 >  Click on the arrow on the left of **ngsphenos.prior** to open the detailed view of the distribution.
->  Set the **M** parameter (mean) to **2.986** and the **S** parameter (standard deviation) to **0.288034** ([Figure 7](#MRCApriorDet)).
+>  Set the **M** parameter (mean) to **2.986** and the **S** parameter (standard deviation) to **0.288034** ([Figure 9](#MRCApriorDet)).
 >  Click on the arrow again to close the detailed view.
 >
 
@@ -197,8 +197,8 @@ You will notice that a new parameter (and prior) has been added to the list, the
 
 <figure>
 	<a id="MRCApriorDet"></a>
-	<img style="width:75.0%;" src="figures/MRCAprior_det.png" alt="">
-	<figcaption>Figure 6: MRCA prior with age distribution.</figcaption>
+	<img style="width:80.0%;" src="figures/MRCAprior_det.png" alt="">
+	<figcaption>Figure 9: MRCA prior with age distribution.</figcaption>
 </figure>
 <br>
 
@@ -211,12 +211,12 @@ In addition to the age calibrations, we will also constrain the **ozsphenos** su
 >  Check the **monophyletic** checkbox next to the **ozsphenos.prior** calibration.
 >
 
-The final result is shown in [Figure 7](#MRCApriorsAll). All node calibrations used in this tutorial were taken from the original analysis {% cite Rabosky2014 --file ClaDS-tutorial/master-refs.bib %}.
+The final result is shown in [Figure 10](#MRCApriorsAll). All node calibrations used in this tutorial were taken from the original analysis {% cite Rabosky2014 --file ClaDS-tutorial/master-refs.bib %}.
 
 <figure>
 	<a id="MRCApriorsAll"></a>
-	<img style="width:75.0%;" src="figures/MRCAprior_all.png" alt="">
-	<figcaption>Figure 6: Priors panel with all three MRCA priors.</figcaption>
+	<img style="width:80.0%;" src="figures/MRCAprior_all.png" alt="">
+	<figcaption>Figure 10: Priors panel with all three MRCA priors.</figcaption>
 </figure>
 <br>
 
@@ -225,13 +225,13 @@ The final result is shown in [Figure 7](#MRCApriorsAll). All node calibrations u
 Next, we will specify the tree prior, i.e. the ClaDS model. By default most of the parameters of the model are estimated, so it is not necessary to change their starting values. However, the extant sampling proportion ({% eqinline \rho %}) is fixed, and so needs to be correct. The dataset contains 85% of the extant diversity of the Australian sphenomorphine clade {% cite Rabosky2014 --file ClaDS-tutorial/master-refs.bib %}, so we will set {% eqinline \rho = 0.85 %}.
 
 >  Click on the arrow next to **Tree** to open the **ClaDS** options. 
->  Change the value for **rho** (extant sampling proportion) of the ClaDS model to **0.85** ([Figure 7](#treePrior)).
+>  Change the value for **rho** (extant sampling proportion) of the ClaDS model to **0.85** ([Figure 11](#treePrior)).
 > 
 
 <figure>
 	<a id="treePrior"></a>
-	<img style="width:75.0%;" src="figures/treeprior.png" alt="">
-	<figcaption>Figure 7: Setting the ClaDS tree prior.</figcaption>
+	<img style="width:80.0%;" src="figures/treeprior.png" alt="">
+	<figcaption>Figure 11: Setting the ClaDS tree prior.</figcaption>
 </figure>
 <br>
 
@@ -241,18 +241,18 @@ Note that many other options are available in this section, such as fixing the v
 
 Most of the default parameter priors are reasonable, so we will not change them. However, the default prior for the mean clock rate is a uniform distribution from 0 to Infinity, which allows values which are too large for most datasets. A reasonable value for the global substitution rate of skinks is between 10^-3 to 1 substitution/site/My, so we will set a lognormal prior around this range of values.
 
->  Use the dropdown menu on the right of **ucldMean.c:lizards* to select a **LogNormal** distribution for this prior.
+>  Use the dropdown menu on the right of **ucldMean.c:lizards** to select a **LogNormal** distribution for this prior.
 >  Click on the arrow left to **ucldMean.c:lizards** to open the detailed options. 
 >  Set the mean parameter **M** to **0.1** and the standard deviation parameter **S** to **1.0**. Check the **Mean in Real Space** checkbox.
 >  Click on the arrow again to close the detailed view.
 > 
 
-The final configuration for this prior is shown in [Figure 7](#clockPrior).
+The final configuration for this prior is shown in [Figure 12](#clockPrior).
 
 <figure>
 	<a id="clockPrior"></a>
-	<img style="width:75.0%;" src="figures/clockprior.png" alt="">
-	<figcaption>Figure 7: Setting the prior on the mean clock rate.</figcaption>
+	<img style="width:80.0%;" src="figures/clockprior.png" alt="">
+	<figcaption>Figure 12: Setting the prior on the mean clock rate.</figcaption>
 </figure>
 <br>
 
@@ -299,7 +299,7 @@ The run should take about 5-15 minutes.
 
 Our run has generated 3 different files:
 
-* `lizards_clads.log` which is the general trace log.
+* `lizards.log` which is the general trace log.
 * `lizards.trees` and `lizards.rates.trees` which recorded the sampled trees in Nexus format.
 
 Note that our shortened analysis has probably not converged (as can easily be seen when importing the log file into Tracer). Thus we provide files from a longer run in the tutorial files, which we will use in the following section.
