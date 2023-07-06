@@ -50,7 +50,7 @@ Tracer is used for assessing and summarizing the posterior estimates of the vari
 
 ## Dataset: Lizards alignment
 
-The dataset used in this tutorial is an alignment of two genes (12S rRNA and cytochrome B) for 238 extant species of Australian sphenomorphine skinks. This alignment was originally published in {% cite Rabosky2014 --file ClaDS-tutorial/master-refs.bib %}, and included a total of 6 genes. To keep this tutorial simple, we limit ourselves to the two longest genes.
+The dataset used in this tutorial is an alignment of two genes (12S rRNA and cytochrome B) for 219 extant species of Australian sphenomorphine skinks. This alignment was originally published in {% cite Rabosky2014 --file ClaDS-tutorial/master-refs.bib %}, and included a total of 6 genes. To keep this tutorial simple, we limit ourselves to the two longest genes.
 
 ## Setting up the XML file
 
@@ -138,10 +138,10 @@ The final alignment configuration is shown in [Figure 5](#linkedModels).
 
 ### Setting up the substitution models
 
-The next set is to set up the substitution models for each alignments, found in the **Site Model** panel. Following the original analysis, we will set up GTR + G models for both alignments, with the number of rate categories set to 4.
+The next set is to set up the substitution models for each alignments, found in the **Site Model** panel. To simplify the original analysis, we will set up HKY + G models for both alignments, with the number of rate categories set to 4.
 
 > In the **Site Model** panel, set the **Gamma Category Count** to **4**.
-> Click on the arrow next to **JC69**, and select the **GTR** model.
+> Click on the arrow next to **JC69**, and select the **HKY** model.
 > Select the second alignment in the **Partition** list on the left, and repeat the same set up. 
 >
 
@@ -156,7 +156,7 @@ The final substitution model configuration is shown in [Figure 6](#subst).
 
 ### Setting up the clock priors
 
-Next come the clock model, and again we will follow the original study and use a relaxed lognormal clock model. 
+Next come the clock model, and here we will follow the original study and use a relaxed lognormal clock model. 
 
 > In the **Clock Model** panel, Click on the arrow next to **Strict Clock**, and select the **Relaxed Clock Log Normal** model.
 >
@@ -189,7 +189,7 @@ The new prior now appears at the bottom of the list of priors, but it is not com
 
 >  Click on the arrow on the right to **[none]** and select a **LogNormal** distribution for the age of the clade.
 >  Click on the arrow on the left of **ngsphenos.prior** to open the detailed view of the distribution.
->  Set the **M** parameter (mean) to **2.986** and the **S** parameter (standard deviation) to **0.288034** ([Figure 9](#MRCApriorDet)).
+>  Set the **M** parameter (mean) to **3* and the **S** parameter (standard deviation) to **0.29** ([Figure 9](#MRCApriorDet)).
 >  Click on the arrow again to close the detailed view.
 >
 
@@ -203,15 +203,15 @@ You will notice that a new parameter (and prior) has been added to the list, the
 <br>
 
 Similarly, we will set two additional node calibrations:
- 1. MRCA prior with a taxon set named **ozsphenos**, which contains all taxa except 5 (**PAPUASCINCUS_SP**, **PRASINOHAEMA_VIRENS**, **SPHENOMORPHUS_JOBIENSIS**, **SPHENOMORPHUS_MUELLERI** and **SPHENOMORPHUS_SOLOMONIS**). The age prior for this subclade is LogNormal(M = **3.2308**, S = **0.20596**).
- 2. MRCA prior with a taxon set named **allsphenos**, which contains all taxa (and thus represents a prior on the root of the tree). The root age prior is LogNormal(M = **3.7305**, S = **0.17713**).
+ 1. MRCA prior with a taxon set named **ozsphenos**, which contains all taxa except 5 (**PAPUASCINCUS_SP**, **PRASINOHAEMA_VIRENS**, **SPHENOMORPHUS_JOBIENSIS**, **SPHENOMORPHUS_MUELLERI** and **SPHENOMORPHUS_SOLOMONIS**). The age prior for this subclade is LogNormal(M = **3.2**, S = **0.2**).
+ 2. MRCA prior with a taxon set named **allsphenos**, which contains all taxa (and thus represents a prior on the root of the tree). The root age prior is LogNormal(M = **3.7**, S = **0.18**).
  
 In addition to the age calibrations, we will also constrain the **ozsphenos** subclade to be monophyletic.
 
 >  Check the **monophyletic** checkbox next to the **ozsphenos.prior** calibration.
 >
 
-The final result is shown in [Figure 10](#MRCApriorsAll). All node calibrations used in this tutorial were taken from the original analysis {% cite Rabosky2014 --file ClaDS-tutorial/master-refs.bib %}.
+The root clade is also monophyletic, of course, but we do not need to specify this explicitly. The final result is shown in [Figure 10](#MRCApriorsAll). All node calibrations used in this tutorial were taken from the original analysis {% cite Rabosky2014 --file ClaDS-tutorial/master-refs.bib %}.
 
 <figure>
 	<a id="MRCApriorsAll"></a>
