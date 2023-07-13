@@ -309,14 +309,14 @@ MCC_colour_plot("primates.MCC.tre", plotfile = "primates_MCC.pdf")
 
 <figure>
 	<a id="mcc_birth"></a>
-	<img src="figures/mcc_birth.pdf" alt="">
+	<img src="figures/mcc_birth.png" alt="">
 	<figcaption>Figure 12: MCC tree with edges coloured by the median birth rate.</figcaption>
 </figure>
 <br>
 
 <figure>
 	<a id="mcc_death"></a>
-	<img src="figures/mcc_death.pdf" alt="">
+	<img src="figures/mcc_death.png" alt="">
 	<figcaption>Figure 13: MCC tree with edges coloured by the median death rate.</figcaption>
 </figure>
 <br>
