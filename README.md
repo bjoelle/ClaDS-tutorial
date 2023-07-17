@@ -9,6 +9,7 @@ beastversion: 2.7.x
 
 
 
+
 # Background
 
 This tutorial will show how to configure and run a model with progressive changes in birth and death rates, using the ClaDS tree prior implemented in the BEAST2 package ClaDS.
@@ -213,7 +214,7 @@ Note that many other options are available in this section, such as fixing the v
 
 ### The parameter priors
 
-Most of the default parameter priors are reasonable, so we will not change them. However, the default prior for the mean clock rate is a uniform distribution from 0 to Infinity, which allows values which are too large for most datasets. A reasonable value for the global substitution rate of primates is on the order of 10^-2 substitution/site/My, so we will set a exponential prior around this value.
+Most of the default parameter priors are reasonable, so we will not change them. However, the default prior for the mean clock rate is a uniform distribution from 0 to Infinity, which allows values which are too large for most datasets. A reasonable value for the global substitution rate of primates is on the order of {% eqinline 10^{-2} %} substitution/site/My, so we will set a exponential prior around this value.
 
 >  Use the dropdown menu on the right of **clockRate.c:primates** to select a **Exponential** distribution for this prior.
 >  Click on the arrow left to **clockRate.c:primates** to open the detailed options. Set the **Mean** parameter to **0.01**.
