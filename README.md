@@ -7,6 +7,8 @@ beastversion: 2.7.x
 ---
 
 
+
+
 # Background
 
 This tutorial will show how to configure and run a model with progressive changes in birth and death rates, using the ClaDS tree prior implemented in the BEAST2 package ClaDS.
@@ -167,7 +169,7 @@ The next step is to look at the different priors, in the **Priors** panel. The d
 
 <figure>
 	<a id="taxonSet"></a>
-	<img style="width:80.0%;" src="figures/taxonSet.png" alt="">
+	<img style="width:40.0%;" src="figures/taxonSet.png" alt="">
 	<figcaption>Figure 7: Taxon set editor.</figcaption>
 </figure>
 <br>
