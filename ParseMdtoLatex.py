@@ -498,6 +498,9 @@ text = formatSuperscript(text)
 # Remove relevant references heading
 text = removeRefSection(text) 
 
+# Remove escaped characters that pandoc inserts (should actually only remove inside math mode)
+text = text.replace("\\^","^").replace("\\_","_").replace("\\{","{").replace("\\}","}")
+
 # Remove unknown latex tags that pandoc inserts
 # remove \toprule, \bottomrule, \tightlist
 text = text.replace("\\toprule","").replace("\\bottomrule","").replace("\\tightlist","")
