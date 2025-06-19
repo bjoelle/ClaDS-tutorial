@@ -145,7 +145,7 @@ The next set is to set up the substitution models for each alignments, found in 
 > In the **Site Model** panel, set the **Gamma Category Count** to **4**.
 > Click on the arrow next to **JC69**, and select the **HKY** model.
 > Select the remaining three partitions (use **shift+click**). 
-> Select `noncoding` and click **OK** to to clone the site model for the other three partitions from `noncoding`.
+> Select `noncoding` in the **Clone from** dropdown menu and click **OK** to to clone the site model for the other three partitions from `noncoding`.
 >
 
 The final substitution model configuration is shown in [Figure 6](#subst).
@@ -214,7 +214,7 @@ Note that many other options are available in this section, such as fixing the v
 
 ### The parameter priors
 
-Most of the default parameter priors are reasonable, so we will not change them. However, the default prior for the mean clock rate is a uniform distribution from 0 to Infinity, which allows values which are too large for most datasets. A reasonable value for the global substitution rate of primates is on the order of {% eqinline 10^{-2} %} substitution/site/My, so we will set a exponential prior around this value.
+Most of the default parameter priors are reasonable, so we will not change them. However, the default prior for the mean clock rate is a gamma distribution with {% eqinline \alpha = 0.01 %} and {% eqinline \beta = 100 %}. This distribution is very wide and does not correspond to our actual knowldege about the substitution process. A reasonable value for the global substitution rate of primates is on the order of {% eqinline 10^{-2} %} substitution/site/My, so we will set a exponential prior around this value.
 
 >  Use the dropdown menu on the right of **clockRate.c:primates** to select a **Exponential** distribution for this prior.
 >  Click on the arrow left to **clockRate.c:primates** to open the detailed options. Set the **Mean** parameter to **0.01**.
