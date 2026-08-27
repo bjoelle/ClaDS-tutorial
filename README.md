@@ -1,9 +1,18 @@
 ---
 author: Joëlle Barido-Sottani
-level: Intermediate
 title: The ClaDS package
 subtitle: Inferring progressive changes in birth and death rates
-beastversion: 2.7.x
+beastversion_tutorial: 2.7.x
+workflow: Advanced analysis
+status: current
+keywords:
+- birth-death
+- diversification
+- relaxed clock
+packages:
+- ClaDS
+domains:
+- macroevolution
 ---
 
 
